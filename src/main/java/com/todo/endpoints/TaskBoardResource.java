@@ -1,5 +1,6 @@
 package com.todo.endpoints;
 
+import com.todo.dto.UpdateRequest;
 import com.todo.service.TaskService;
 import com.todo.utils.constants.Response;
 import com.todo.modules.taskboard.usecase.list.GetTaskRequest;
@@ -46,6 +47,18 @@ public class TaskBoardResource {
         try {
             var response = this.taskService.findByCategory(request);
             if (response != null)
+                return Response.success(HttpStatus.OK.value(), "Success", response);
+            else return Response.error(HttpStatus.BAD_REQUEST.value(), "Fail");
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    @PostMapping("/update")
+    public Response<Object> update(@RequestBody UpdateRequest request) {
+        try {
+            var response = this.taskService.update(request);
+            if (response.isPresent())
                 return Response.success(HttpStatus.OK.value(), "Success", response);
             else return Response.error(HttpStatus.BAD_REQUEST.value(), "Fail");
         } catch (Exception e) {

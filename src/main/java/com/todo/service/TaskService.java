@@ -1,5 +1,6 @@
 package com.todo.service;
 
+import com.todo.dto.UpdateRequest;
 import com.todo.modules.taskboard.usecase.list.GetTaskRequest;
 import com.todo.modules.taskboard.usecase.list.GetTaskResponse;
 import com.todo.modules.taskboard.usecase.save.ManageTaskRequest;
@@ -11,4 +12,6 @@ public interface TaskService {
     Optional<ManageTaskResponse> save(ManageTaskRequest request);
 
     GetTaskResponse findByCategory(GetTaskRequest request);
+
+    Optional<String> update(UpdateRequest request);
 }
